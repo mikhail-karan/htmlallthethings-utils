@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-
+	import { PodcastMarkdown } from '$lib';
 	let { data }: PageProps = $props();
 </script>
 
@@ -23,6 +23,7 @@
 {`{% spotify spotify:episode:${episode.id} %}`}
 						</pre>
 					</div>
+					<PodcastMarkdown {episode} />
 				</div>
 			{/each}
 		{:else}
