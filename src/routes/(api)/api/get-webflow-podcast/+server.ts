@@ -23,16 +23,23 @@ The podcast speaks to web development topics as well as running a small business
 
 ---`;
 
-export const GET: RequestHandler = async ({ url }) => {
-	const podcastName = url.searchParams.get('podcastName');
+export const POST: RequestHandler = async ({ request }) => {
+	const body = await request.json();
+	const podcastName = body.podcastName;
+	// const { podcastName } = await request.json();
 
 	const podcasts = await webflow.collections.items.listItems('600f4a96cb38ff4fc3142b42', {
 		limit: 50
 	});
 
+	console.log(podcastName)
+
 	const podcast = podcasts.items?.find(
 		(podcast) => podcast.fieldData?.name?.toLowerCase() === podcastName?.toLowerCase()
 	);
+
+	// console log the first 5 episode titles
+	console.log(podcasts.items?.slice(0, 5).map((podcast) => podcast.fieldData.name));
 
 	if (!podcast) {
 		return new Response('Podcast not found', { status: 404 });
