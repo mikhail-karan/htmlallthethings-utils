@@ -48,10 +48,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const markdownContent = turndown.turndown(podcast?.fieldData['show-notes']);
 	const markdownEpisodeSummary = turndown.turndown(podcast?.fieldData['short-description']);
 
-	const markdown = `${podcastDescription}\n\n
-    ## What's This One About?\n\n
-    ${markdownEpisodeSummary}\n\n
-    ${markdownContent}`;
+	const markdown = `${podcastDescription}\n\n## What's This One About?\n\n${markdownEpisodeSummary}\n\n${markdownContent}`;
 
 	const episode = {
 		name: podcast?.fieldData.name,
