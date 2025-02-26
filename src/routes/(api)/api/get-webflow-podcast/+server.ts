@@ -32,14 +32,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		limit: 50
 	});
 
-	console.log(podcastName)
-
 	const podcast = podcasts.items?.find(
 		(podcast) => podcast.fieldData?.name?.toLowerCase() === podcastName?.toLowerCase()
 	);
-
-	// console log the first 5 episode titles
-	console.log(podcasts.items?.slice(0, 5).map((podcast) => podcast.fieldData.name));
 
 	if (!podcast) {
 		return new Response('Podcast not found', { status: 404 });
